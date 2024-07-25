@@ -58,10 +58,30 @@ The concept of priority inversion, demonstrated in `4_Inversion.sml`, highlights
 
 Our system lacks preemptive multitasking, which would be necessary to fully prevent priority inversion. A preemptive scheduling system allows the operating system or runtime environment to interrupt (preempt) a running task to allow a higher-priority task to run. Without preemption, once a low-priority task starts executing, it can't be interrupted even if a high-priority task becomes ready to run.
 
-This lack of preemption is why priority inversion is inevitable in our current implementation. To fully address this, we would need:
+This lack of preemption is why priority inversion is inevitable in our current implementation. Here's the output from `4_Inversion.sml` that clearly demonstrates this issue:
+
+```
+--- Demonstrating Priority Inversion ---
+Event published at 5.3E~05s: Data: 100
+Event published at 0.01335s: Alert: Critical Error
+Processing started at 0.01354s: Data: 100 (Priority: Low, Wait time: 0.013487s)
+Processing completed at 0.518833s (Processing time: 0.505293s)
+Processing started at 0.519169s: Alert: Critical Error (Priority: High, Wait time: 0.505819s)
+Processing completed at 0.57287s (Processing time: 0.053701s)
+Priority Inversion Detected: High priority event waited 0.505819s
+```
+
+This output shows:
+
+1. A low-priority Data event is published first, followed shortly by a high-priority Alert event.
+2. The Data event starts processing almost immediately and takes about 0.5 seconds to complete.
+3. Despite its high priority, the Alert event has to wait for the Data event to finish, resulting in a wait time of approximately 0.5 seconds.
+4. The system correctly detects and reports this as a priority inversion.
+
+To fully address this issue, we would need:
 
 1. A preemptive scheduling system
 2. Support from the runtime or operating system for priority inheritance or similar protocols
 3. Careful design of tasks to be interruptible
 
-Understanding these concepts is crucial for designing robust, real-time event processing systems, especially in scenarios where responsiveness to high-priority events is critical.
+Understanding these concepts is crucial for designing robust, real-time event processing systems, especially in scenarios where responsiveness to high-priority events is critical. The demonstration in `4_Inversion.sml` provides a clear illustration of how priority inversion can occur in non-preemptive systems, even when using priority queues, and underscores the importance of considering these factors in system design.
