@@ -1,4 +1,4 @@
-# From Streaming Event System to PriML with Channel: An Intro
+# From Streaming System to PriML with Channel: An Intro
 
 This directory contains four demonstrations of streaming event system concepts implemented in Standard ML (SML). Each demonstration builds upon the previous one, showcasing different aspects of event processing systems.
 
