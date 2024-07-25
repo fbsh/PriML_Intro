@@ -1,6 +1,6 @@
 # From Streaming System to PriML with Channel: An Intro
 
-This directory contains four demonstrations of streaming event system concepts implemented in Standard ML (SML). Each demonstration builds upon the previous one, showcasing different aspects of event processing systems.
+This repository serves as an introductory resource for individuals interested in PriML (Priority ML), a priority-based extension to Standard ML. The content progresses from practical implementations of event streaming systems to the fundamental design requirements that motivated the development of PriML. Enjoy!
 
 ## Contents
 
